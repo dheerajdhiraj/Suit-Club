@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suit Club | Collection</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0,1" />
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/luxury-theme.css">
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+
+  <header class="sticky top-0 z-50 px-6 py-4 backdrop-blur-md md:px-12">
+    <div class="mx-auto flex max-w-7xl items-center justify-between">
+      <a href="/" class="flex items-center gap-3">
+        <img src="assets/logo.jpg" alt="Suit Club Logo" class="h-10 w-auto object-contain fallback-icon">
+        <h1 class="text-lg font-semibold tracking-wide md:text-xl">
+          SUIT CLUB
+        </h1>
+      </a>
+      <a href="/" class="text-sm font-medium transition flex items-center gap-1">
+        <span class="material-symbols-outlined text-sm">arrow_back</span> Back to Home
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero Banner -->
+  <section class="bg-navy py-16 text-center px-6">
+    <h1 id="collectionTitle" class="font-serif text-4xl md:text-5xl font-bold mb-4">Loading Collection...</h1>
+    <p id="collectionDesc" class="max-w-2xl mx-auto"></p>
+  </section>
+
+  <!-- Search, Filter & Sort Bar -->
+  <div class="px-6 py-4 sticky top-[73px] z-40 border-b" style="background: var(--clr-surface);">
+    <div class="mx-auto max-w-7xl flex flex-col md:flex-row gap-4 items-center">
+      <!-- Search -->
+      <div class="relative flex-1 w-full">
+        <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-lg">search</span>
+        <input type="text" id="searchInput" placeholder="Search suits..." class="w-full pl-10 pr-4 py-2.5 rounded-lg outline-none text-sm">
+      </div>
+      <!-- Sort -->
+      <select id="sortSelect" class="rounded-lg px-4 py-2.5 text-sm outline-none cursor-pointer">
+        <option value="newest">Newest First</option>
+        <option value="price-low">Price: Low to High</option>
+        <option value="price-high">Price: High to Low</option>
+        <option value="popular">Most Popular</option>
+      </select>
+      <!-- Price Filter -->
+      <div class="flex items-center gap-3 text-sm">
+        <span class="whitespace-nowrap opacity-70">Max Price:</span>
+        <input type="range" id="priceRange" min="0" max="100000" step="1000" value="100000" class="w-32">
+        <span id="priceLabel" class="font-bold whitespace-nowrap min-w-[80px]">Rs. 100,000</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Products Grid -->
+  <main class="flex-1 px-6 py-12 mx-auto max-w-7xl w-full">
+    <p id="resultCount" class="text-sm opacity-60 mb-6"></p>
+    <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+      <!-- Loading State -->
+      <div class="col-span-full text-center py-12 opacity-50" id="loadingState">
+        <span class="material-symbols-outlined animate-spin text-4xl">sync</span>
+        <p class="mt-4">Fetching exclusive suits...</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="pb-8 pt-12 border-t text-center">
+    <p class="text-sm opacity-50">© 2026 Suit Club. All rights reserved. Partnered with Raymond & Siyaram's.</p>
+  </footer>
+
+  <script src="/js/collection.js"></script>
+</body>
+</html>

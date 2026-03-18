@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suit Club | Admin Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0,1" />
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-gray-50 antialiased flex items-center justify-center min-h-screen relative overflow-hidden">
+  
+  <!-- Decorative Background -->
+  <div class="absolute inset-0 bg-navy">
+    <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23c9a050\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+  </div>
+
+  <div class="relative z-10 w-full max-w-md p-8 bg-white rounded-2xl shadow-2xl mx-4">
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-navy mb-4">
+        <span class="material-symbols-outlined text-gold text-3xl">admin_panel_settings</span>
+      </div>
+      <h1 class="font-serif text-3xl font-bold text-navy">Admin Portal</h1>
+      <p class="text-gray-500 mt-2">Sign in to manage Suit Club</p>
+    </div>
+
+    <div id="errorMsg" class="hidden mb-4 p-3 bg-red-50 text-red-600 text-sm rounded border border-red-200"></div>
+
+    <form id="loginForm" class="space-y-6">
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Username</label>
+        <div class="relative">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <span class="material-symbols-outlined text-gray-400 text-sm">person</span>
+          </div>
+          <input type="text" id="username" required class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-gold focus:border-gold outline-none transition">
+        </div>
+      </div>
+      
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+        <div class="relative">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <span class="material-symbols-outlined text-gray-400 text-sm">lock</span>
+          </div>
+          <input type="password" id="password" required class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-gold focus:border-gold outline-none transition">
+        </div>
+      </div>
+
+      <button type="submit" id="submitBtn" class="w-full bg-gold text-navy font-bold py-3 rounded-lg hover:bg-yellow-500 transition shadow-lg">
+        Sign In
+      </button>
+    </form>
+    
+    <div class="mt-6 text-center text-xs text-gray-400">
+      <a href="/" class="hover:text-gold transition inline-flex items-center gap-1">
+        <span class="material-symbols-outlined text-xs">arrow_back</span> Return to site
+      </a>
+    </div>
+  </div>
+
+  <script src="/js/admin-login.js"></script>
+</body>
+</html>

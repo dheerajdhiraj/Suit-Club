@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suit Club | Bespoke Tailoring Kathmandu</title>
+  <meta name="description"
+    content="Kathmandu's premier destination for luxury menswear. Bespoke tailoring with exclusive fabrics from Raymond & Siyaram's.">
+  <meta property="og:title" content="Suit Club | Bespoke Tailoring Kathmandu">
+  <meta property="og:description"
+    content="Experience the art of bespoke tailoring. Curated styles for the modern leader and unforgettable weddings.">
+  <meta property="og:type" content="website">
+  <!-- Google Fonts: Playfair Display & Inter -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <!-- Material Symbols -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0,1" />
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/luxury-theme.css">
+</head>
+
+<body class="antialiased">
+
+  <!-- Header -->
+  <header class="border-gold/20 sticky top-0 z-50 border-b bg-white/90 px-6 py-4 backdrop-blur-md md:px-12">
+    <div class="mx-auto flex max-w-7xl items-center justify-between">
+      <!-- Logo + Brand -->
+      <div class="flex items-center gap-3">
+        <img src="assets/logo.jpg" alt="Suit Club Logo" class="h-10 w-auto object-contain">
+        <h1
+          class="bg-gradient-to-r from-yellow-500 via-red-500 to-yellow-600 bg-clip-text text-lg font-semibold tracking-wide text-transparent md:text-xl">
+          SUIT CLUB
+        </h1>
+      </div>
+      <!-- Desktop Nav -->
+      <nav class="hidden space-x-8 text-sm font-medium md:flex">
+        <a href="#collections" class="hover:text-gold transition">Collections</a>
+        <a href="#bespoke" class="hover:text-gold transition">Bespoke</a>
+        <a href="#store" class="hover:text-gold transition">Store</a>
+        <a href="#testimonials" class="hover:text-gold transition">Testimonials</a>
+        <a href="#contact" class="hover:text-gold transition">Contact</a>
+      </nav>
+      <!-- Right Icons -->
+      <div class="flex items-center gap-3">
+        <!-- Dark Mode Toggle -->
+        <button id="darkToggle" aria-label="Toggle dark mode" class="hover:bg-gold/10 rounded-full p-2 transition">
+          <span class="material-symbols-outlined text-navy" id="darkIcon">dark_mode</span>
+        </button>
+        <!-- User Account -->
+        <div class="relative">
+          <button id="userBtn" aria-label="User Account" class="hover:bg-gold/10 rounded-full p-2 transition">
+            <span class="material-symbols-outlined text-navy">person</span>
+          </button>
+          <!-- User Dropdown -->
+          <div id="userDropdown"
+            class="absolute right-0 top-12 z-50 w-56 overflow-hidden rounded-xl border border-gray-100 bg-white shadow-2xl">
+            <!-- Logged-out state -->
+            <div id="loggedOutMenu">
+              <button onclick="openAuthModal('login')"
+                class="flex w-full items-center gap-3 px-5 py-3 text-left text-sm font-medium transition hover:bg-gray-50">
+                <span class="material-symbols-outlined text-gold text-lg">login</span> Sign In
+              </button>
+              <button onclick="openAuthModal('register')"
+                class="flex w-full items-center gap-3 px-5 py-3 text-left text-sm font-medium transition hover:bg-gray-50">
+                <span class="material-symbols-outlined text-gold text-lg">person_add</span> Create Account
+              </button>
+            </div>
+            <!-- Logged-in state -->
+            <div id="loggedInMenu" class="hidden">
+              <div class="border-b bg-gray-50 px-5 py-3">
+                <p class="text-xs uppercase tracking-wider text-gray-500">Signed in as</p>
+                <p id="userName" class="text-navy truncate font-bold">User</p>
+              </div>
+              <a href="#" onclick="showWishlist()"
+                class="block flex items-center gap-3 px-5 py-3 text-sm font-medium transition hover:bg-gray-50">
+                <span class="material-symbols-outlined text-gold text-lg">favorite</span> My Wishlist <span
+                  id="wishlistMenuCount"
+                  class="ml-auto rounded-full bg-red-100 px-2 py-0.5 text-xs font-bold text-red-600">0</span>
+              </a>
+              <button onclick="logoutUser()"
+                class="flex w-full items-center gap-3 border-t px-5 py-3 text-left text-sm font-medium text-red-600 transition hover:bg-red-50">
+                <span class="material-symbols-outlined text-lg">logout</span> Sign Out
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Wishlist / Shopping Bag -->
+        <button id="wishlistBtn" aria-label="Wishlist" class="hover:bg-gold/10 relative rounded-full p-2 transition"
+          onclick="showWishlist()">
+          <span class="material-symbols-outlined text-navy">favorite</span>
+          <span id="wishlistCount"
+            class="absolute right-0.5 top-0.5 flex hidden h-5 w-5 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white">0</span>
+        </button>
+        <button id="openBookingBtn"
+          class="bg-navy hover:bg-gold hover:text-navy hidden rounded px-5 py-2 text-sm font-medium text-white transition md:block">
+          Book Appointment
+        </button>
+        <!-- Mobile Menu Toggle -->
+        <button id="mobileMenuBtn" class="hover:bg-gold/10 rounded-full p-2 transition md:hidden"
+          aria-label="Open menu">
+          <span class="material-symbols-outlined text-navy text-2xl">menu</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Slide Menu -->
+  <div id="mobileMenu" class="fixed inset-0 z-[60]" style="pointer-events:none;">
+    <div id="mobileOverlay" class="absolute inset-0 bg-black/60 opacity-0 transition-opacity duration-300"
+      onclick="closeMobileMenu()" style="pointer-events:none;"></div>
+    <div class="absolute right-0 top-0 flex h-full w-72 flex-col bg-white shadow-2xl" style="pointer-events:auto;">
+      <div class="flex items-center justify-between border-b px-6 py-5">
+        <span class="text-navy font-serif text-xl font-bold">Menu</span>
+        <button onclick="closeMobileMenu()" class="rounded-full p-2 hover:bg-gray-100"><span
+            class="material-symbols-outlined">close</span></button>
+      </div>
+      <nav class="flex-1 space-y-1 px-4 py-4">
+        <a href="#collections" onclick="closeMobileMenu()"
+          class="hover:bg-gold/10 block rounded-lg px-4 py-3 font-medium transition">Collections</a>
+        <a href="#bespoke" onclick="closeMobileMenu()"
+          class="hover:bg-gold/10 block rounded-lg px-4 py-3 font-medium transition">Bespoke</a>
+        <a href="#store" onclick="closeMobileMenu()"
+          class="hover:bg-gold/10 block rounded-lg px-4 py-3 font-medium transition">Store</a>
+        <a href="#testimonials" onclick="closeMobileMenu()"
+          class="hover:bg-gold/10 block rounded-lg px-4 py-3 font-medium transition">Testimonials</a>
+        <a href="#contact" onclick="closeMobileMenu()"
+          class="hover:bg-gold/10 block rounded-lg px-4 py-3 font-medium transition">Contact</a>
+      </nav>
+      <div class="border-t p-4">
+        <button onclick="closeMobileMenu(); setTimeout(openBookingModal, 200)"
+          class="bg-navy hover:bg-gold hover:text-navy w-full rounded-lg py-3 font-medium text-white transition">Book
+          Appointment</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="bg-navy relative h-screen max-h-[800px] min-h-[600px] overflow-hidden text-white">
+    <div class="absolute inset-0">
+      <img
+        src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80"
+        alt="Elegant suit" class="h-full w-full object-cover opacity-40">
+    </div>
+    <div class="relative z-10 flex h-full items-center justify-center px-6 text-center">
+      <div>
+        <span class="text-gold animate-on-scroll text-sm uppercase tracking-[0.3em]">Since 2023</span>
+        <h1 class="animate-on-scroll delay-1 mb-6 mt-4 font-serif text-5xl font-bold leading-tight md:text-7xl">Where
+          Tradition<br>Meets Tailoring</h1>
+        <p class="animate-on-scroll delay-2 mx-auto mb-10 max-w-2xl text-lg text-gray-200 md:text-xl">Bespoke suits
+          crafted with Raymond & Siyaram's fabrics. Exclusively at our new Kathmandu store.</p>
+        <div class="animate-on-scroll delay-3 flex flex-col justify-center gap-4 sm:flex-row">
+          <a href="#collections"
+            class="hover:text-navy border border-white bg-transparent px-8 py-4 font-medium text-white transition hover:bg-white">Explore
+            Collections</a>
+          <button id="heroBookBtn" class="bg-gold text-navy px-8 py-4 font-medium transition hover:bg-white">Book
+            Appointment</button>
+        </div>
+      </div>
+    </div>
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+      <span class="material-symbols-outlined text-gold text-3xl">expand_circle_down</span>
+    </div>
+  </section>
+
+  <!-- Partners Section -->
+  <section class="border-gold/10 border-y bg-gray-50 py-16">
+    <div class="animate-on-scroll mx-auto max-w-6xl px-6 text-center">
+      <p class="mb-4 text-xs uppercase tracking-widest text-gray-500">Exclusive Fabrics By</p>
+      <div class="flex flex-wrap items-center justify-center gap-12 md:gap-20">
+        <div class="text-navy font-serif text-2xl font-bold md:text-3xl">Raymond</div>
+        <span class="text-gold text-3xl font-light">✧</span>
+        <div class="text-navy font-serif text-2xl font-bold md:text-3xl">Siyaram's</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Collections -->
+  <section id="collections" class="px-6 py-24">
+    <div class="mx-auto max-w-7xl">
+      <div class="animate-on-scroll mb-16 text-center">
+        <h2 class="text-navy mb-4 font-serif text-4xl font-bold md:text-5xl">The Collections</h2>
+        <p class="mx-auto max-w-2xl text-gray-600">Handpicked branded collections that define confidence, class, and
+          individuality.</p>
+      </div>
+      <div id="categoriesGrid" class="grid grid-cols-1 gap-8 md:grid-cols-3">
+        <!-- Loading skeletons — replaced by JS -->
+        <div class="skeleton-card animate-pulse overflow-hidden bg-white shadow-lg">
+          <div class="aspect-[3/4] bg-gray-200"></div>
+          <div class="space-y-3 p-6">
+            <div class="h-6 w-3/4 rounded bg-gray-200"></div>
+            <div class="h-4 w-full rounded bg-gray-100"></div>
+            <div class="h-4 w-2/3 rounded bg-gray-100"></div>
+          </div>
+        </div>
+        <div class="skeleton-card animate-pulse overflow-hidden bg-white shadow-lg">
+          <div class="aspect-[3/4] bg-gray-200"></div>
+          <div class="space-y-3 p-6">
+            <div class="h-6 w-3/4 rounded bg-gray-200"></div>
+            <div class="h-4 w-full rounded bg-gray-100"></div>
+            <div class="h-4 w-2/3 rounded bg-gray-100"></div>
+          </div>
+        </div>
+        <div class="skeleton-card animate-pulse overflow-hidden bg-white shadow-lg">
+          <div class="aspect-[3/4] bg-gray-200"></div>
+          <div class="space-y-3 p-6">
+            <div class="h-6 w-3/4 rounded bg-gray-200"></div>
+            <div class="h-4 w-full rounded bg-gray-100"></div>
+            <div class="h-4 w-2/3 rounded bg-gray-100"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bespoke Process (4 Steps) -->
+  <section id="bespoke" class="bg-navy py-24 text-white">
+    <div class="mx-auto max-w-6xl px-6">
+      <div class="animate-on-scroll mb-16 text-center">
+        <h2 class="text-gold mb-4 font-serif text-4xl font-bold md:text-5xl">The Bespoke Experience</h2>
+        <p class="mx-auto max-w-2xl text-gray-300">From fabric selection to final fitting – a journey tailored just for
+          you.</p>
+      </div>
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-4">
+        <!-- Step 1 -->
+        <div
+          class="border-gold/20 animate-on-scroll delay-1 rounded-xl border bg-white/5 p-6 text-center backdrop-blur-sm">
+          <span class="material-symbols-outlined text-gold mb-3 text-4xl">fabric</span>
+          <h3 class="mb-2 font-serif text-xl font-bold">1. Fabric</h3>
+          <p class="text-sm text-gray-300">Choose from Raymond, Siyaram's, and more.</p>
+        </div>
+        <!-- Step 2 -->
+        <div
+          class="border-gold/20 animate-on-scroll delay-2 rounded-xl border bg-white/5 p-6 text-center backdrop-blur-sm">
+          <span class="material-symbols-outlined text-gold mb-3 text-4xl">style</span>
+          <h3 class="mb-2 font-serif text-xl font-bold">2. Style</h3>
+          <p class="text-sm text-gray-300">Classic, tuxedo, modern – your silhouette.</p>
+        </div>
+        <!-- Step 3 -->
+        <div
+          class="border-gold/20 animate-on-scroll delay-3 rounded-xl border bg-white/5 p-6 text-center backdrop-blur-sm">
+          <span class="material-symbols-outlined text-gold mb-3 text-4xl">location_on</span>
+          <h3 class="mb-2 font-serif text-xl font-bold">3. Location</h3>
+          <p class="text-sm text-gray-300">In-store or home visit. We come to you.</p>
+        </div>
+        <!-- Step 4 -->
+        <div
+          class="border-gold bg-gold/10 shadow-gold/20 animate-on-scroll delay-4 rounded-xl border-2 p-6 text-center shadow-lg">
+          <span class="material-symbols-outlined text-gold mb-3 text-4xl">calendar_month</span>
+          <h3 class="mb-2 font-serif text-xl font-bold">4. Booking</h3>
+          <p class="text-sm text-gray-200">Schedule your private session.</p>
+        </div>
+      </div>
+      <div class="animate-on-scroll mt-12 text-center">
+        <button id="bespokeBookBtn"
+          class="bg-gold text-navy rounded px-8 py-4 font-medium transition hover:bg-white">Start Your Journey</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Store Spotlight -->
+  <section id="store" class="px-6 py-24">
+    <div class="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 lg:grid-cols-2">
+      <div class="animate-on-scroll">
+        <span class="text-gold text-sm font-semibold uppercase tracking-widest">New Opening</span>
+        <h2 class="text-navy mb-6 mt-2 font-serif text-4xl font-bold md:text-5xl">Visit Our Kathmandu Store</h2>
+        <p class="mb-8 text-lg text-gray-600">Experience the art of bespoke tailoring in person at shivani kunj-Gita
+          Complex,Shruti Marg,Kathmandu. Our master tailors await you.</p>
+        <address class="mb-8 space-y-2 not-italic text-gray-700">
+          <p class="flex items-center gap-2"><span class="material-symbols-outlined text-gold">location_on</span>shivani
+            kunj shruti marg, Kathmandu 44600, Nepal</p>
+          <p class="flex items-center gap-2"><span class="material-symbols-outlined text-gold">call</span>
+            +977-9851152441</p>
+          <p class="flex items-center gap-2"><span class="material-symbols-outlined text-gold">schedule</span> Sun–Fri:
+            10am – 8pm | Sat: Closed</p>
+        </address>
+        <a href="https://maps.google.com/?q=shivani+kunj+shruti+marg+Kathmandu" target="_blank"
+          class="bg-navy hover:bg-gold hover:text-navy inline-flex items-center gap-2 px-6 py-3 font-medium text-white transition">Get
+          Directions <span class="material-symbols-outlined">north_east</span></a>
+      </div>
+      <div class="animate-on-scroll delay-2 h-96 overflow-hidden rounded-2xl bg-gray-200 shadow-xl">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.0123456789!2d85.323456!3d27.712345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjfCsDQyJzQ0LjQiTiA4NcKwMTknMjQuNCJF!5e0!3m2!1sen!2snp!4v1698765432100"
+          width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Carousel -->
+  <section id="testimonials" class="bg-gray-50 py-24">
+    <div class="mx-auto max-w-7xl px-6">
+      <div class="animate-on-scroll mb-16 text-center">
+        <h2 class="text-navy mb-4 font-serif text-4xl font-bold md:text-5xl">What Our Clients Say</h2>
+        <p class="mx-auto max-w-2xl text-gray-600">Trusted by Kathmandu's most discerning gentlemen.</p>
+      </div>
+      <!-- Carousel Container -->
+      <div class="animate-on-scroll relative">
+        <div class="overflow-hidden">
+          <div class="carousel-track" id="testimonialTrack">
+            <!-- Slide 1 -->
+            <div class="carousel-slide">
+              <div class="border-gold h-full rounded-r-xl border-l-4 bg-white p-8 shadow-lg">
+                <div class="mb-4 flex gap-1">
+                  <span class="material-symbols-outlined text-gold text-lg">star</span><span
+                    class="material-symbols-outlined text-gold text-lg">star</span><span
+                    class="material-symbols-outlined text-gold text-lg">star</span><span
+                    class="material-symbols-outlined text-gold text-lg">star</span><span
+                    class="material-symbols-outlined text-gold text-lg">star</span>
+                </div>
+                <p class="mb-6 italic text-gray-600">"The attention to detail is unmatched. My wedding suit from Suit
+                  Club was perfection."</p>
+                <div class="flex items-center gap-4">
+                  <div class="bg-gold/20 text-gold flex h-12 w-12 items-center justify-center rounded-full font-bold">RS
+                  </div>
+                  <div>
+                    <h4 class="font-bold">Tarkeshwor Sharma</h4>
+                    <p class="text-sm text-gray-500">Kathmandu</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Slide 2 -->
+            <div class="carousel-slide">
+              <div class="border-gold h-full rounded-r-xl border-l-4 bg-white p-8 shadow-lg">
+                <div class="mb-4 flex gap-1">
+                  <span class="material-symbols-outlined text-gold text-lg">star</span><span
+                    class="material-symbols-outlined text-gold text-lg">star</span><span
+                    class="material-symbols-outlined text-gold text-lg">star</span><span
+                    class="material-symbols-outlined text-gold text-lg">star</span><span
+                    class="material-symbols-outlined text-gold text-lg">star</span>
+                </div>
+                <p class="mb-6 italic text-gray-600">"Raymond fabrics and their tailoring expertise – truly world-class
+                  service right here in Nepal."</p>
+                <div class="flex items-center gap-4">
+                  <div class="bg-gold/20 text-gold flex h-12 w-12 items-center justify-center rounded-full font-bold">PG
+                  </div>
+                  <div>
+                    <h4 class="font-bold">Dhiraj Chaudhary</h4>
+                    <p class="text-sm text-gray-500">Lalitpur</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Slide 3 -->
+            <div class="carousel-slide">
+              <div class="border-gold h-full rounded-r-xl border-l-4 bg-white p-8 shadow-lg">
+                <div class="mb-4 flex gap-1">
+                  <span class="material-symbols-outlined text-gold text-lg">star</span><span
+                    class="material-symbols-outlined text-gold text-lg">star</span><span
+                    class="material-symbols-outlined text-gold text-lg">star</span><span
+                    class="material-symbols-outlined text-gold text-lg">star</span><span
+                    class="material-symbols-outlined text-gold text-lg">star</span>
+                </div>
+                <p class="mb-6 italic text-gray-600">"From consultation to final fit, every step felt exclusive. I'll
+                  never go anywhere else."</p>
+                <div class="flex items-center gap-4">
+                  <div class="bg-gold/20 text-gold flex h-12 w-12 items-center justify-center rounded-full font-bold">AB
+                  </div>
+                  <div>
+                    <h4 class="font-bold">Amit Bajracharya</h4>
+                    <p class="text-sm text-gray-500">Patan</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Slide 4 -->
+            <div class="carousel-slide">
+              <div class="border-gold h-full rounded-r-xl border-l-4 bg-white p-8 shadow-lg">
+                <div class="mb-4 flex gap-1">
+                  <span class="material-symbols-outlined text-gold text-lg">star</span><span
+                    class="material-symbols-outlined text-gold text-lg">star</span><span
+                    class="material-symbols-outlined text-gold text-lg">star</span><span
+                    class="material-symbols-outlined text-gold text-lg">star</span><span
+                    class="material-symbols-outlined text-gold text-lg">star</span>
+                </div>
+                <p class="mb-6 italic text-gray-600">"Best tailoring in Kathmandu. The Siyaram fabric quality is
+                  incredible and the fit was perfect."</p>
+                <div class="flex items-center gap-4">
+                  <div class="bg-gold/20 text-gold flex h-12 w-12 items-center justify-center rounded-full font-bold">SK
+                  </div>
+                  <div>
+                    <h4 class="font-bold">Suman Karki</h4>
+                    <p class="text-sm text-gray-500">Bhaktapur</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Slide 5 -->
+            <div class="carousel-slide">
+              <div class="border-gold h-full rounded-r-xl border-l-4 bg-white p-8 shadow-lg">
+                <div class="mb-4 flex gap-1">
+                  <span class="material-symbols-outlined text-gold text-lg">star</span><span
+                    class="material-symbols-outlined text-gold text-lg">star</span><span
+                    class="material-symbols-outlined text-gold text-lg">star</span><span
+                    class="material-symbols-outlined text-gold text-lg">star</span><span
+                    class="material-symbols-outlined text-lg text-gray-300">star</span>
+                </div>
+                <p class="mb-6 italic text-gray-600">"Ordered suits for our entire wedding party. The team handled
+                  everything flawlessly."</p>
+                <div class="flex items-center gap-4">
+                  <div class="bg-gold/20 text-gold flex h-12 w-12 items-center justify-center rounded-full font-bold">RT
+                  </div>
+                  <div>
+                    <h4 class="font-bold">Rajesh Tamang</h4>
+                    <p class="text-sm text-gray-500">Kathmandu</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Slide 6 -->
+            <div class="carousel-slide">
+              <div class="border-gold h-full rounded-r-xl border-l-4 bg-white p-8 shadow-lg">
+                <div class="mb-4 flex gap-1">
+                  <span class="material-symbols-outlined text-gold text-lg">star</span><span
+                    class="material-symbols-outlined text-gold text-lg">star</span><span
+                    class="material-symbols-outlined text-gold text-lg">star</span><span
+                    class="material-symbols-outlined text-gold text-lg">star</span><span
+                    class="material-symbols-outlined text-gold text-lg">star</span>
+                </div>
+                <p class="mb-6 italic text-gray-600">"The home visit for measurements was so convenient. True luxury
+                  service in Nepal!"</p>
+                <div class="flex items-center gap-4">
+                  <div class="bg-gold/20 text-gold flex h-12 w-12 items-center justify-center rounded-full font-bold">NM
+                  </div>
+                  <div>
+                    <h4 class="font-bold">Nisha Maharjan</h4>
+                    <p class="text-sm text-gray-500">Lalitpur</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Carousel Nav -->
+        <div class="mt-8 flex items-center justify-center gap-4">
+          <button onclick="moveCarousel(-1)"
+            class="bg-navy hover:bg-gold hover:text-navy flex h-10 w-10 items-center justify-center rounded-full text-white shadow-lg transition">
+            <span class="material-symbols-outlined text-lg">chevron_left</span>
+          </button>
+          <div id="carouselDots" class="flex gap-2"></div>
+          <button onclick="moveCarousel(1)"
+            class="bg-navy hover:bg-gold hover:text-navy flex h-10 w-10 items-center justify-center rounded-full text-white shadow-lg transition">
+            <span class="material-symbols-outlined text-lg">chevron_right</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact" class="bg-navy pb-8 pt-20 text-white">
+    <div class="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 md:grid-cols-4">
+      <div>
+        <div class="mb-6 flex items-center gap-2">
+          <span class="material-symbols-outlined text-gold text-3xl"><img src="assets\logo2.jpg" alt="suit Club Logo"></span>
+          <span class="font-serif text-2xl font-bold">Suit Club</span>
+        </div>
+        <p class="text-sm leading-relaxed text-gray-400">Kathmandu's premier destination for luxury menswear. Defined by
+          quality, tradition, and modern elegance.</p>
+        <div class="mt-6 flex gap-4">
+          <a href="https://www.instagram.com/1.siyarams_suit_club?igsh=N3NjZWpzZXlmczdv" target="_blank"
+            class="hover:text-gold transform text-gray-400 transition hover:scale-110" title="Follow us on Instagram">
+            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+            </svg>
+          </a>
+          <a href="https://www.facebook.com/share/1AXHcQzH9X/" target="_blank"
+            class="hover:text-gold transform text-gray-400 transition hover:scale-110" title="Like us on Facebook">
+            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+            </svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <h4 class="text-gold mb-6 font-serif text-xl font-bold">Explore</h4>
+        <ul class="space-y-3 text-sm">
+          <li><a href="#collections" class="text-gray-400 transition hover:text-white">Collections</a></li>
+          <li><a href="#bespoke" class="text-gray-400 transition hover:text-white">Bespoke</a></li>
+          <li><a href="#store" class="text-gray-400 transition hover:text-white">Store</a></li>
+          <li><a href="#" class="text-gray-400 transition hover:text-white">Gift Cards</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-gold mb-6 font-serif text-xl font-bold">Contact</h4>
+        <address class="space-y-3 text-sm not-italic text-gray-400">
+          <p class="flex items-center gap-2"><span
+              class="material-symbols-outlined text-gold text-base">location_on</span> shivani kunj-Gita Complex,Shruti
+            Marg,Kathmandu</p>
+          <p class="flex items-center gap-2"><span class="material-symbols-outlined text-gold text-base">call</span>
+            +977-9851152441</p>
+          <p class="flex items-center gap-2"><span class="material-symbols-outlined text-gold text-base">mail</span>
+            dheerajdhiraj91@gmail.com</p>
+        </address>
+      </div>
+      <div>
+        <h4 class="text-gold mb-6 font-serif text-xl font-bold">Newsletter</h4>
+        <p class="mb-4 text-sm text-gray-400">Be the first to know about new collections and private events.</p>
+        <form id="newsletterForm" class="flex flex-col gap-3">
+          <input type="email" id="newsletterEmail" placeholder="Your email" required
+            class="focus:ring-gold rounded border border-gray-700 bg-white/10 px-4 py-3 text-sm focus:outline-none focus:ring-1">
+          <button type="submit" id="newsletterBtn"
+            class="bg-gold text-navy rounded px-4 py-3 font-medium transition hover:bg-white">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="mt-16 border-t border-gray-800 pt-8 text-center text-sm text-gray-500">
+      <p>© 2026 Suit Club. All rights reserved. Partnered with Raymond & Siyaram's.-Designed and @powered by Dheeraj</p>
+    </div>
+  </footer>
+
+  <!-- Booking Modal -->
+  <div id="bookingModal" class="fixed inset-0 z-[100] hidden items-center justify-center overflow-y-auto p-4">
+    <!-- Backdrop -->
+    <div class="fixed inset-0 bg-black/70 backdrop-blur-sm transition-opacity" onclick="closeBookingModal()"></div>
+    <!-- Modal Content -->
+    <div class="relative max-h-[90vh] w-full max-w-4xl overflow-y-auto rounded-2xl bg-white shadow-2xl">
+      <div class="sticky top-0 flex items-center justify-between border-b border-gray-200 bg-white px-6 py-4">
+        <h3 class="text-navy font-serif text-2xl font-bold">Book Your Appointment</h3>
+        <button onclick="closeBookingModal()" class="rounded-full p-2 hover:bg-gray-100">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      <div class="grid grid-cols-1 gap-8 p-6 lg:grid-cols-2">
+        <!-- Left: Date & Time -->
+        <div class="space-y-6">
+          <div>
+            <label class="mb-2 block text-sm font-medium text-gray-700" for="bookingDate">Select Date</label>
+            <input type="date" id="bookingDate" name="bookingDate" required
+              class="focus:border-gold focus:ring-gold w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-4 text-base focus:outline-none focus:ring-1"
+              min="">
+          </div>
+          <div>
+            <label class="mb-2 block text-sm font-medium text-gray-700">Preferred Time</label>
+            <div class="flex flex-wrap gap-2" id="timeSlots">
+              <button type="button"
+                class="time-slot hover:border-gold hover:text-gold rounded-lg border border-gray-300 px-4 py-2 transition"
+                data-time="10:00 AM">10:00 AM</button>
+              <button type="button"
+                class="time-slot hover:border-gold hover:text-gold rounded-lg border border-gray-300 px-4 py-2 transition"
+                data-time="11:30 AM">11:30 AM</button>
+              <button type="button"
+                class="time-slot hover:border-gold hover:text-gold rounded-lg border border-gray-300 px-4 py-2 transition"
+                data-time="01:00 PM">01:00 PM</button>
+              <button type="button"
+                class="time-slot hover:border-gold hover:text-gold rounded-lg border border-gray-300 px-4 py-2 transition"
+                data-time="02:30 PM">02:30 PM</button>
+              <button type="button"
+                class="time-slot hover:border-gold hover:text-gold rounded-lg border border-gray-300 px-4 py-2 transition"
+                data-time="04:00 PM">04:00 PM</button>
+            </div>
+            <input type="hidden" id="selectedTime" name="selectedTime" value="">
+          </div>
+        </div>
+        <!-- Right: Form -->
+        <div>
+          <form id="bookingForm" onsubmit="submitBooking(event)">
+            <div class="space-y-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Full Name</label>
+                <input type="text" name="fullName" required
+                  class="focus:ring-gold focus:border-gold mt-1 w-full rounded-lg border border-gray-300 px-4 py-3">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Email Address</label>
+                <input type="email" name="email" required
+                  class="focus:ring-gold focus:border-gold mt-1 w-full rounded-lg border border-gray-300 px-4 py-3">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Phone Number</label>
+                <input type="tel" name="phone" required
+                  class="focus:ring-gold focus:border-gold mt-1 w-full rounded-lg border border-gray-300 px-4 py-3">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Special Requests</label>
+                <textarea name="requests" rows="3"
+                  class="focus:ring-gold focus:border-gold mt-1 w-full rounded-lg border border-gray-300 px-4 py-3"
+                  placeholder="Fabric, style, or any preferences..."></textarea>
+              </div>
+              <button type="submit"
+                class="bg-gold text-navy hover:bg-navy w-full rounded-lg py-4 font-bold transition hover:text-white">Confirm
+                Appointment</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirmation Modal -->
+  <div id="confirmationModal" class="fixed inset-0 z-[200] hidden items-center justify-center p-4">
+    <div class="fixed inset-0 bg-black/70 backdrop-blur-sm" onclick="closeConfirmationModal()"></div>
+    <div class="relative w-full max-w-md rounded-2xl bg-white p-8 text-center shadow-2xl">
+      <div class="bg-gold/10 mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full">
+        <span class="material-symbols-outlined text-gold text-4xl">check_circle</span>
+      </div>
+      <h3 class="text-navy mb-2 font-serif text-2xl font-bold">Booking Confirmed!</h3>
+      <p class="mb-6 text-gray-600">Thank you for choosing Suit Club. Your session is scheduled.</p>
+      <div class="mb-6 rounded-xl bg-gray-50 p-4">
+        <div class="flex justify-around">
+          <div>
+            <p class="text-xs uppercase text-gray-500">Date</p>
+            <p id="confirmedDate" class="font-bold">—</p>
+          </div>
+          <div class="w-px bg-gray-300"></div>
+          <div>
+            <p class="text-xs uppercase text-gray-500">Time</p>
+            <p id="confirmedTime" class="font-bold">—</p>
+          </div>
+        </div>
+      </div>
+      <p class="text-navy mb-4 text-sm font-medium" id="confirmedRef"></p>
+      <button onclick="closeConfirmationModal()"
+        class="bg-navy hover:bg-gold hover:text-navy w-full rounded-lg py-3 font-bold text-white transition">Done</button>
+    </div>
+  </div>
+
+  <!-- Auth Modal (Login / Register) -->
+  <div id="authModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4">
+    <div class="fixed inset-0 bg-black/70 backdrop-blur-sm" onclick="closeAuthModal()"></div>
+    <div class="relative w-full max-w-md overflow-hidden rounded-2xl bg-white shadow-2xl">
+      <div class="flex items-center justify-between border-b px-6 py-4">
+        <h3 id="authTitle" class="text-navy font-serif text-2xl font-bold">Sign In</h3>
+        <button onclick="closeAuthModal()" class="rounded-full p-2 hover:bg-gray-100"><span
+            class="material-symbols-outlined">close</span></button>
+      </div>
+      <div class="p-6">
+        <!-- Login Form -->
+        <form id="loginForm" class="space-y-4">
+          <div>
+            <label class="mb-1 block text-sm font-medium text-gray-700">Email</label>
+            <input type="email" id="authEmail" required
+              class="focus:ring-gold focus:border-gold w-full rounded-lg border px-4 py-3 outline-none">
+          </div>
+          <div>
+            <label class="mb-1 block text-sm font-medium text-gray-700">Password</label>
+            <input type="password" id="authPassword" required
+              class="focus:ring-gold focus:border-gold w-full rounded-lg border px-4 py-3 outline-none">
+          </div>
+          <div id="registerFields" class="hidden space-y-4">
+            <div>
+              <label class="mb-1 block text-sm font-medium text-gray-700">Full Name</label>
+              <input type="text" id="authName"
+                class="focus:ring-gold focus:border-gold w-full rounded-lg border px-4 py-3 outline-none">
+            </div>
+          </div>
+          <div id="authError" class="hidden text-sm text-red-500"></div>
+          <button type="submit" id="authSubmitBtn"
+            class="bg-gold text-navy hover:bg-navy w-full rounded-lg py-3 font-bold transition hover:text-white">Sign
+            In</button>
+          <div class="text-center text-sm text-gray-500">
+            <span id="authToggleText">Don't have an account?</span>
+            <button type="button" onclick="toggleAuthMode()" id="authToggleBtn"
+              class="text-gold ml-1 font-medium hover:underline">Create one</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Wishlist Sidebar -->
+  <div id="wishlistSidebar" class="fixed inset-0 z-[80] hidden">
+    <div class="absolute inset-0 bg-black/60" onclick="closeWishlist()"></div>
+    <div
+      class="absolute right-0 top-0 flex h-full w-80 translate-x-full transform flex-col bg-white shadow-2xl transition-transform duration-300 md:w-96"
+      id="wishlistPanel">
+      <div class="flex items-center justify-between border-b px-6 py-5">
+        <h3 class="text-navy flex items-center gap-2 font-serif text-xl font-bold"><span
+            class="material-symbols-outlined text-red-500">favorite</span> My Wishlist</h3>
+        <button onclick="closeWishlist()" class="rounded-full p-2 hover:bg-gray-100"><span
+            class="material-symbols-outlined">close</span></button>
+      </div>
+      <div id="wishlistItems" class="flex-1 space-y-3 overflow-y-auto p-4">
+        <p class="py-12 text-center text-gray-500">Your wishlist is empty</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/qr/L5I7YM4UVQSDE1" target="_blank"
+    class="whatsapp-btn group fixed bottom-6 right-6 z-40 flex items-center gap-2 rounded-full bg-green-500 px-5 py-3 text-white shadow-xl transition-all hover:scale-105 hover:bg-green-600"
+    title="Chat on WhatsApp">
+    <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+      <path
+        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+      <path
+        d="M12 0C5.373 0 0 5.373 0 12c0 2.121.554 4.113 1.519 5.846L.053 23.681l5.97-1.566A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.82c-1.87 0-3.655-.503-5.217-1.44l-.374-.222-3.877 1.017 1.035-3.78-.245-.388A9.78 9.78 0 012.18 12c0-5.422 4.398-9.82 9.82-9.82 5.422 0 9.82 4.398 9.82 9.82 0 5.422-4.398 9.82-9.82 9.82z" />
+    </svg>
+    <span class="hidden text-sm font-medium sm:inline">Chat with us</span>
+  </a>
+
+  <!-- Back to Top Button -->
+  <button id="backToTop"
+    class="bg-navy hover:bg-gold hover:text-navy fixed bottom-6 left-6 z-40 flex h-12 w-12 items-center justify-center rounded-full text-white shadow-xl transition-all"
+    onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <span class="material-symbols-outlined">keyboard_arrow_up</span>
+  </button>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast"></div>
+
+  <!-- JavaScript -->
+  <script src="js/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,312 @@
+/* ══════════════════════════════════════════════
+   DARK LUXURY THEME — COLOR OVERRIDES ONLY
+   Palette:
+     Background:  #0A0A0A  (pure obsidian)
+     Surface:     #111111 / #161616
+     Gold:        #C8A84B  (champagne)
+     Gold light:  #EDD98A
+     Text:        #F0EDE6  (warm off-white)
+     Text muted:  #8A8070
+     Border:      rgba(200,168,75,0.18)
+══════════════════════════════════════════════ */
+
+:root {
+  --clr-bg:        #0A0A0A;
+  --clr-surface:   #111111;
+  --clr-card:      #161616;
+  --clr-gold:      #C8A84B;
+  --clr-gold-lt:   #EDD98A;
+  --clr-gold-dk:   #8B6914;
+  --clr-text:      #F0EDE6;
+  --clr-muted:     #8A8070;
+  --clr-soft:      #B8B0A0;
+  --clr-border:    rgba(200, 168, 75, 0.18);
+}
+
+/* ── Global body ───────────────────────────── */
+body {
+  background-color: var(--clr-bg) !important;
+  color: var(--clr-text) !important;
+}
+
+/* ── Header ────────────────────────────────── */
+header {
+  background: rgba(10, 10, 10, 0.97) !important;
+  border-color: var(--clr-border) !important;
+}
+/* Brand title gradient */
+header h1 {
+  background-image: linear-gradient(90deg, var(--clr-gold-dk), var(--clr-gold), var(--clr-gold-lt), var(--clr-gold)) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+/* Nav links */
+header nav a { color: var(--clr-soft) !important; }
+header nav a:hover { color: var(--clr-gold) !important; }
+/* Header icons */
+header .material-symbols-outlined { color: var(--clr-soft) !important; }
+/* Book Appointment button */
+#openBookingBtn {
+  background: linear-gradient(135deg, var(--clr-gold-dk), var(--clr-gold)) !important;
+  color: #0A0A0A !important;
+}
+#openBookingBtn:hover {
+  background: var(--clr-gold-lt) !important;
+  color: #0A0A0A !important;
+}
+
+/* ── Mobile menu panel ─────────────────────── */
+#mobileMenu > div:last-child { background: var(--clr-surface) !important; }
+#mobileMenu .border-b       { border-color: var(--clr-border) !important; }
+#mobileMenu .border-t       { border-color: var(--clr-border) !important; }
+#mobileMenu .text-navy      { color: var(--clr-text) !important; }
+#mobileMenu nav a           { color: var(--clr-soft) !important; }
+#mobileMenu nav a:hover     { background: rgba(200,168,75,0.08) !important; color: var(--clr-gold) !important; }
+#mobileMenu button.bg-navy  { background: linear-gradient(135deg, var(--clr-gold-dk), var(--clr-gold)) !important; color: #0A0A0A !important; }
+
+/* ── User dropdown ─────────────────────────── */
+#userDropdown {
+  background: var(--clr-surface) !important;
+  border: 1px solid var(--clr-border) !important;
+}
+#userDropdown button,
+#userDropdown a               { color: var(--clr-text) !important; }
+#userDropdown button:hover,
+#userDropdown a:hover         { background: rgba(200,168,75,0.08) !important; }
+#userDropdown .bg-gray-50     { background: rgba(200,168,75,0.06) !important; border-color: var(--clr-border) !important; }
+#userDropdown .text-gray-500  { color: var(--clr-muted) !important; }
+#userDropdown #userName       { color: var(--clr-gold) !important; }
+#userDropdown .border-t       { border-color: rgba(255,255,255,0.07) !important; }
+#wishlistMenuCount            { background: rgba(200,168,75,0.15) !important; color: var(--clr-gold) !important; }
+/* Wishlist badge */
+#wishlistCount { background: var(--clr-gold) !important; color: #0A0A0A !important; }
+
+/* ── Hero section ──────────────────────────── */
+section.bg-navy {
+  background: linear-gradient(160deg, #0A0A0A 0%, #0D0B06 60%, #110E04 100%) !important;
+}
+section.bg-navy .absolute.inset-0 img { opacity: 0.25 !important; }
+section.bg-navy h1              { color: var(--clr-text) !important; }
+section.bg-navy .text-gold      { color: var(--clr-gold) !important; }
+section.bg-navy .text-gray-200  { color: var(--clr-soft) !important; }
+/* "Explore Collections" outline button */
+section.bg-navy a[href="#collections"] {
+  border-color: rgba(200,168,75,0.4) !important;
+  color: var(--clr-soft) !important;
+}
+section.bg-navy a[href="#collections"]:hover {
+  background: rgba(200,168,75,0.09) !important;
+  border-color: var(--clr-gold) !important;
+  color: var(--clr-gold) !important;
+}
+/* "Book Appointment" CTA */
+#heroBookBtn {
+  background: linear-gradient(135deg, var(--clr-gold-dk), var(--clr-gold)) !important;
+  color: #0A0A0A !important;
+}
+#heroBookBtn:hover { background: var(--clr-gold-lt) !important; color: #0A0A0A !important; }
+
+/* ── Partners strip ────────────────────────── */
+.bg-gray-50                  { background: var(--clr-surface) !important; }
+.bg-gray-50 .text-gray-500   { color: var(--clr-muted) !important; }
+.bg-gray-50 .text-navy       { color: var(--clr-text) !important; }
+.bg-gray-50 .text-gold       { color: var(--clr-gold) !important; }
+
+/* ── Collections section ───────────────────── */
+#collections                        { background: var(--clr-bg) !important; }
+#collections h2                     { color: var(--clr-text) !important; }
+#collections .text-navy             { color: var(--clr-text) !important; }
+#collections p.text-gray-600        { color: var(--clr-muted) !important; }
+/* Skeleton / JS-rendered cards */
+#categoriesGrid .bg-white,
+#categoriesGrid .shadow-lg          { background: var(--clr-card) !important; border: 1px solid var(--clr-border) !important; box-shadow: 0 8px 32px rgba(0,0,0,0.55) !important; }
+#categoriesGrid .bg-gray-200        { background: #1E1E1E !important; }
+#categoriesGrid .bg-gray-100        { background: #191919 !important; }
+#categoriesGrid .shadow-lg:hover    { box-shadow: 0 16px 48px rgba(200,168,75,0.18) !important; }
+#categoriesGrid .text-gray-600,
+#categoriesGrid .text-gray-700      { color: var(--clr-muted) !important; }
+
+/* ── Bespoke section ───────────────────────── */
+#bespoke                             { background: linear-gradient(160deg, #0A0A0A 0%, #100D05 100%) !important; }
+#bespoke h2                          { color: var(--clr-gold) !important; }
+#bespoke .text-gold                  { color: var(--clr-gold) !important; }
+#bespoke .text-gray-300              { color: var(--clr-muted) !important; }
+#bespoke .text-gray-200              { color: var(--clr-soft) !important; }
+#bespoke h3                          { color: var(--clr-text) !important; }
+/* Step cards */
+#bespoke .bg-white\/5                { background: rgba(200,168,75,0.04) !important; border-color: var(--clr-border) !important; }
+#bespoke .bg-white\/5:hover          { background: rgba(200,168,75,0.09) !important; }
+/* Featured step */
+#bespoke .bg-gold\/10                { background: linear-gradient(135deg, rgba(200,168,75,0.14), rgba(200,168,75,0.06)) !important; }
+#bespoke .border-gold                { border-color: var(--clr-gold) !important; }
+/* CTA */
+#bespokeBookBtn {
+  background: linear-gradient(135deg, var(--clr-gold-dk), var(--clr-gold)) !important;
+  color: #0A0A0A !important;
+}
+#bespokeBookBtn:hover { background: var(--clr-gold-lt) !important; color: #0A0A0A !important; }
+
+/* ── Store section ─────────────────────────── */
+#store                      { background: var(--clr-surface) !important; }
+#store h2                   { color: var(--clr-text) !important; }
+#store .text-navy           { color: var(--clr-text) !important; }
+#store .text-gold           { color: var(--clr-gold) !important; }
+#store p.text-gray-600      { color: var(--clr-soft) !important; }
+#store address p,
+#store .text-gray-700       { color: var(--clr-soft) !important; }
+/* Get Directions */
+#store a[href*="maps"]      { background: var(--clr-gold) !important; color: #0A0A0A !important; }
+#store a[href*="maps"]:hover{ background: var(--clr-gold-lt) !important; }
+/* Map box */
+#store .bg-gray-200         { background: var(--clr-card) !important; border: 1px solid var(--clr-border) !important; }
+
+/* ── Testimonials ──────────────────────────── */
+#testimonials                       { background: var(--clr-surface) !important; }
+#testimonials h2                    { color: var(--clr-text) !important; }
+#testimonials .text-navy            { color: var(--clr-text) !important; }
+#testimonials p.text-gray-600       { color: var(--clr-muted) !important; }
+/* Testimonial cards */
+#testimonials .bg-white             { background: var(--clr-card) !important; border-left-color: var(--clr-gold) !important; box-shadow: 0 4px 24px rgba(0,0,0,0.5) !important; }
+#testimonials .text-gold            { color: var(--clr-gold) !important; }
+#testimonials .text-gray-600        { color: var(--clr-soft) !important; }
+#testimonials .text-gray-300        { color: rgba(255,255,255,0.1) !important; }
+#testimonials h4                    { color: var(--clr-text) !important; }
+#testimonials .text-gray-500        { color: var(--clr-muted) !important; }
+#testimonials .bg-gold\/20          { background: rgba(200,168,75,0.14) !important; }
+/* Carousel nav */
+#testimonials .bg-navy              { background: var(--clr-card) !important; border: 1px solid var(--clr-border) !important; }
+#testimonials .bg-navy:hover        { background: var(--clr-gold) !important; color: #0A0A0A !important; }
+
+/* ── Footer ────────────────────────────────── */
+footer                          { background: #060606 !important; border-top: 1px solid var(--clr-border) !important; }
+footer .text-gold               { color: var(--clr-gold) !important; }
+footer .text-gray-400           { color: var(--clr-muted) !important; }
+footer a.text-gray-400          { color: var(--clr-muted) !important; }
+footer a.text-gray-400:hover    { color: var(--clr-text) !important; }
+footer .text-gray-500           { color: var(--clr-muted) !important; }
+footer .border-gray-800         { border-color: var(--clr-border) !important; }
+footer input[type="email"]      { background: rgba(255,255,255,0.05) !important; border-color: var(--clr-border) !important; color: var(--clr-text) !important; }
+footer input[type="email"]:focus{ border-color: var(--clr-gold) !important; box-shadow: 0 0 0 2px rgba(200,168,75,0.15) !important; outline: none; }
+footer input::placeholder       { color: var(--clr-muted) !important; }
+#newsletterBtn                  { background: linear-gradient(135deg, var(--clr-gold-dk), var(--clr-gold)) !important; color: #0A0A0A !important; }
+#newsletterBtn:hover            { background: var(--clr-gold-lt) !important; }
+
+/* ── Booking modal ─────────────────────────── */
+#bookingModal .bg-white,
+#bookingModal .rounded-2xl          { background: var(--clr-surface) !important; }
+#bookingModal .border-b,
+#bookingModal .border-gray-200      { border-color: var(--clr-border) !important; }
+#bookingModal h3                    { color: var(--clr-text) !important; }
+#bookingModal label,
+#bookingModal .text-gray-700        { color: var(--clr-soft) !important; }
+#bookingModal input,
+#bookingModal textarea              { background: rgba(255,255,255,0.05) !important; border-color: var(--clr-border) !important; color: var(--clr-text) !important; }
+#bookingModal input:focus,
+#bookingModal textarea:focus        { border-color: var(--clr-gold) !important; box-shadow: 0 0 0 2px rgba(200,168,75,0.15) !important; outline: none; }
+#bookingModal input::placeholder,
+#bookingModal textarea::placeholder { color: var(--clr-muted) !important; }
+#bookingModal .bg-gray-50           { background: rgba(200,168,75,0.05) !important; }
+/* Time slots */
+.time-slot                          { border-color: var(--clr-border) !important; color: var(--clr-soft) !important; background: transparent !important; }
+.time-slot:hover,
+.time-slot.selected                 { border-color: var(--clr-gold) !important; color: var(--clr-gold) !important; background: rgba(200,168,75,0.08) !important; }
+/* Submit */
+#bookingForm button[type="submit"]  { background: linear-gradient(135deg, var(--clr-gold-dk), var(--clr-gold)) !important; color: #0A0A0A !important; }
+#bookingForm button[type="submit"]:hover { background: var(--clr-gold-lt) !important; }
+
+/* ── Confirmation modal ────────────────────── */
+#confirmationModal .bg-white        { background: var(--clr-surface) !important; }
+#confirmationModal h3               { color: var(--clr-text) !important; }
+#confirmationModal .text-gray-600   { color: var(--clr-soft) !important; }
+#confirmationModal .bg-gold\/10     { background: rgba(200,168,75,0.1) !important; }
+#confirmationModal .text-gold       { color: var(--clr-gold) !important; }
+#confirmationModal .bg-gray-50      { background: rgba(200,168,75,0.06) !important; border: 1px solid var(--clr-border) !important; }
+#confirmationModal .text-gray-500   { color: var(--clr-muted) !important; }
+#confirmationModal .bg-gray-300,
+#confirmationModal .w-px            { background: var(--clr-border) !important; }
+#confirmedDate, #confirmedTime      { color: var(--clr-text) !important; }
+#confirmedRef                       { color: var(--clr-gold) !important; }
+#confirmationModal .bg-navy         { background: var(--clr-gold) !important; color: #0A0A0A !important; }
+#confirmationModal .bg-navy:hover   { background: var(--clr-gold-lt) !important; }
+
+/* ── Auth modal ────────────────────────────── */
+#authModal .bg-white                { background: var(--clr-surface) !important; }
+#authModal .border-b                { border-color: var(--clr-border) !important; }
+#authModal h3                       { color: var(--clr-text) !important; }
+#authModal label,
+#authModal .text-gray-700           { color: var(--clr-soft) !important; }
+#authModal .text-navy               { color: var(--clr-text) !important; }
+#authModal input                    { background: rgba(255,255,255,0.05) !important; border-color: var(--clr-border) !important; color: var(--clr-text) !important; }
+#authModal input:focus              { border-color: var(--clr-gold) !important; box-shadow: 0 0 0 2px rgba(200,168,75,0.15) !important; outline: none; }
+#authModal .text-gray-500           { color: var(--clr-muted) !important; }
+#authModal .text-gold               { color: var(--clr-gold) !important; }
+#authModal .hover\:bg-gray-100:hover{ background: rgba(200,168,75,0.08) !important; }
+#authSubmitBtn                      { background: linear-gradient(135deg, var(--clr-gold-dk), var(--clr-gold)) !important; color: #0A0A0A !important; }
+#authSubmitBtn:hover                { background: var(--clr-gold-lt) !important; color: #0A0A0A !important; }
+
+/* ── Wishlist sidebar ──────────────────────── */
+#wishlistPanel                      { background: var(--clr-surface) !important; }
+#wishlistPanel .border-b            { border-color: var(--clr-border) !important; }
+#wishlistPanel h3,
+#wishlistPanel .text-navy           { color: var(--clr-text) !important; }
+#wishlistPanel .text-red-500        { color: var(--clr-gold) !important; }
+#wishlistPanel .hover\:bg-gray-100:hover { background: rgba(200,168,75,0.08) !important; }
+#wishlistItems .text-gray-500       { color: var(--clr-muted) !important; }
+
+/* ── Back-to-top ───────────────────────────── */
+#backToTop              { background: var(--clr-card) !important; border: 1px solid var(--clr-border) !important; color: var(--clr-text) !important; }
+#backToTop:hover        { background: var(--clr-gold) !important; color: #0A0A0A !important; }
+
+/* ── Toast ─────────────────────────────────── */
+.toast                  { background: var(--clr-surface) !important; border: 1px solid var(--clr-border) !important; color: var(--clr-text) !important; box-shadow: 0 8px 30px rgba(0,0,0,0.5) !important; }
+
+/* ── Dark-mode variables kept in sync ─────── */
+:root { --bg: var(--clr-bg); --bg-alt: var(--clr-surface); --text: var(--clr-text); --text-muted: var(--clr-muted); --card-bg: var(--clr-card); }
+html.dark { --bg:#0A0A0A; --bg-alt:#111111; --text:#F0EDE6; --text-muted:#8A8070; --card-bg:#161616; }
+html.dark body  { background-color:#0A0A0A; color:#F0EDE6; }
+html.dark header{ background:rgba(10,10,10,0.98)!important; border-color:rgba(200,168,75,.2)!important; }
+html.dark .bg-gray-50   { background:#111111!important; }
+html.dark .bg-white     { background:#161616!important; }
+html.dark #testimonials { background:#111111!important; }
+html.dark .text-gray-600,
+html.dark .text-gray-700{ color:#8A8070!important; }
+html.dark .shadow-lg    { box-shadow:0 4px 20px rgba(0,0,0,.6)!important; }
+
+/* ── Scroll animations ─────────────────────── */
+.animate-on-scroll { opacity:0; transform:translateY(40px); transition:opacity .7s ease, transform .7s ease; }
+.animate-on-scroll.visible { opacity:1; transform:translateY(0); }
+.animate-on-scroll.delay-1 { transition-delay:.1s; }
+.animate-on-scroll.delay-2 { transition-delay:.2s; }
+.animate-on-scroll.delay-3 { transition-delay:.3s; }
+.animate-on-scroll.delay-4 { transition-delay:.4s; }
+
+/* ── Carousel ──────────────────────────────── */
+.carousel-track { display:flex; transition:transform .5s ease-in-out; }
+.carousel-slide { min-width:100%; padding:0 12px; box-sizing:border-box; }
+@media(min-width:768px){ .carousel-slide{ min-width:33.333%; } }
+
+/* ── Toast base ────────────────────────────── */
+.toast { position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(100px); padding:14px 28px; border-radius:12px; font-size:14px; z-index:9999; opacity:0; transition:transform .4s ease, opacity .4s ease; pointer-events:none; }
+.toast.show { transform:translateX(-50%) translateY(0); opacity:1; }
+
+/* ── Mobile menu transition ────────────────── */
+#mobileMenu { transform:translateX(100%); transition:transform .35s ease; }
+#mobileMenu.open { transform:translateX(0); }
+
+/* ── Back-to-top visibility ────────────────── */
+#backToTop { opacity:0; pointer-events:none; transition:opacity .3s, transform .3s; transform:translateY(12px); }
+#backToTop.show { opacity:1; pointer-events:auto; transform:translateY(0); }
+
+/* ── WhatsApp pulse ────────────────────────── */
+.whatsapp-btn { animation:pulse-wa 2s infinite; }
+@keyframes pulse-wa { 0%,100%{box-shadow:0 0 0 0 rgba(37,211,102,.5)} 50%{box-shadow:0 0 0 14px rgba(37,211,102,0)} }
+
+/* ── User dropdown visibility ──────────────── */
+#userDropdown { opacity:0; pointer-events:none; transform:translateY(-8px); transition:opacity .2s, transform .2s; }
+#userDropdown.open { opacity:1; pointer-events:auto; transform:translateY(0); }
+
+/* ── Collection-specific overrides ─────────── */
+#priceRange { accent-color: var(--clr-gold); }
+select, input[type="text"] { background: rgba(255,255,255,0.05); border-color: var(--clr-border); color: var(--clr-text); }
+select:focus, input[type="text"]:focus { border-color: var(--clr-gold); }
