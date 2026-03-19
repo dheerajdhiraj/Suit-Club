@@ -445,9 +445,9 @@ function initBackToTop() {
 
 // ─── Dynamic Collections from API ────────────────────────────────────────────
 const FALLBACK_CARDS = [
-  { name: 'The Executive', description: 'Timeless sophistication for the modern leader.', imageUrl: './assets/executive.jpg' },
-  { name: 'Wedding Luxe', description: 'Make your day unforgettable with bespoke elegance.', imageUrl: './assets/nepalease heritage.jpg' },
-  { name: 'Nepalese Heritage', description: 'Local inspiration, global craftsmanship.', imageUrl: './assets/tradition1.jpg' },
+  { _id: 'c1', name: 'The Executive', description: 'Timeless sophistication for the modern leader.', imageUrl: './assets/executive.jpg' },
+  { _id: 'c2', name: 'Wedding Luxe', description: 'Make your day unforgettable with bespoke elegance.', imageUrl: './assets/nepalease heritage.jpg' },
+  { _id: 'c3', name: 'Nepalese Heritage', description: 'Local inspiration, global craftsmanship.', imageUrl: './assets/tradition1.jpg' },
 ];
 
 function renderCategoryCard(cat, index) {
@@ -463,12 +463,12 @@ function renderCategoryCard(cat, index) {
     <div class="p-6">
       <h3 class="mb-2 font-serif text-2xl font-bold">${cat.name}</h3>
       <p class="mb-4 text-gray-600">${cat.description || 'Exclusive suits crafted with the finest materials.'}</p>
-      <a href="collection.html?category=${encodeURIComponent(cat.name)}" class="text-gold inline-flex items-center gap-1 font-medium transition hover:gap-2">
+      <a href="collection.html?id=${cat._id}&category=${encodeURIComponent(cat.name)}" class="text-gold inline-flex items-center gap-1 font-medium transition hover:gap-2">
         Explore <span class="material-symbols-outlined text-sm">arrow_forward</span>
       </a>
     </div>
   `;
-  card.addEventListener('click', () => { window.location.href = `/collection.html?category=${encodeURIComponent(cat.name)}`; });
+  card.addEventListener('click', () => { window.location.href = `collection.html?id=${cat._id}&category=${encodeURIComponent(cat.name)}`; });
   return card;
 }
 
