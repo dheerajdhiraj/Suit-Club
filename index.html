@@ -88,13 +88,18 @@
             </div>
           </div>
         </div>
-        <!-- Wishlist / Shopping Bag -->
         <button id="wishlistBtn" aria-label="Wishlist" class="hover:bg-gold/10 relative rounded-full p-2 transition"
           onclick="showWishlist()">
           <span class="material-symbols-outlined text-navy">favorite</span>
           <span id="wishlistCount"
             class="absolute right-0.5 top-0.5 flex hidden h-5 w-5 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white">0</span>
         </button>
+        <!-- Shopping Bag -->
+        <a href="cart.html" id="cartBtn" aria-label="Shopping Bag" class="hover:bg-gold/10 relative rounded-full p-2 transition">
+          <span class="material-symbols-outlined text-navy">shopping_bag</span>
+          <span id="cartBadge"
+            class="absolute right-0.5 top-0.5 flex hidden h-5 w-5 items-center justify-center rounded-full bg-gold text-[10px] font-bold text-navy">0</span>
+        </a>
         <button id="openBookingBtn"
           class="bg-navy hover:bg-gold hover:text-navy hidden rounded px-5 py-2 text-sm font-medium text-white transition md:block">
           Book Appointment

@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Book Button
   document.getElementById('bookBtn').addEventListener('click', () => {
-    window.location.href = '/index.html#bespoke';
+    window.location.href = 'index.html#bespoke';
   });
 
   // Star rating input
@@ -80,6 +80,44 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.textContent = 'Submit Review';
       btn.disabled = false;
       showToast('❌ Failed to submit review');
+    });
+  });
+
+  // Add to Cart Button
+  document.getElementById('addToCartBtn')?.addEventListener('click', () => {
+    if (!currentProduct) return;
+    
+    const btn = document.getElementById('addToCartBtn');
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '<span class="material-symbols-outlined animate-spin">sync</span> Adding...';
+    btn.disabled = true;
+
+    fetch('/api/cart', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        productId: currentProduct._id,
+        title: currentProduct.title,
+        price: currentProduct.price,
+        imageUrl: currentProduct.imageUrl
+      })
+    })
+    .then(res => res.json())
+    .then(() => {
+      showToast('🛒 Added to cart successfully!');
+      btn.innerHTML = '<span class="material-symbols-outlined">check_circle</span> Added';
+      setTimeout(() => {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      }, 2000);
+      // Optional: Update header cart count if implemented
+      if (typeof updateCartBadge === 'function') updateCartBadge();
+    })
+    .catch(err => {
+      console.error('Error adding to cart:', err);
+      showToast('❌ Failed to add to cart');
+      btn.innerHTML = originalText;
+      btn.disabled = false;
     });
   });
 
@@ -303,7 +341,7 @@ function loadRelated(categoryId, excludeId) {
       grid.innerHTML = related.map(prod => {
         const badgeHTML = prod.badge ? `<span class="badge ${getBadgeClass(prod.badge)}" style="position:absolute;top:8px;left:8px;z-index:5;font-size:10px;font-weight:700;padding:3px 8px;border-radius:6px;text-transform:uppercase;">${prod.badge}</span>` : '';
         return `
-        <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition group cursor-pointer" onclick="window.location.href='/product.html?id=${prod._id}'">
+        <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition group cursor-pointer" onclick="window.location.href='product.html?id=${prod._id}'">
           <div class="aspect-[3/4] overflow-hidden bg-gray-100 relative">
             ${badgeHTML}
             <img src="${prod.imageUrl || 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=400'}" alt="${prod.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">

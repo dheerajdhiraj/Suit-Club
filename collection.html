@@ -13,15 +13,22 @@
 
   <header class="sticky top-0 z-50 px-6 py-4 backdrop-blur-md md:px-12">
     <div class="mx-auto flex max-w-7xl items-center justify-between">
-      <a href="/" class="flex items-center gap-3">
+      <a href="index.html" class="flex items-center gap-3">
         <img src="assets/logo.jpg" alt="Suit Club Logo" class="h-10 w-auto object-contain fallback-icon">
-        <h1 class="text-lg font-semibold tracking-wide md:text-xl">
+        <h1 class="bg-gradient-to-r from-yellow-500 via-red-500 to-yellow-600 bg-clip-text text-lg font-semibold tracking-wide text-transparent md:text-xl uppercase">
           SUIT CLUB
         </h1>
       </a>
-      <a href="/" class="text-sm font-medium transition flex items-center gap-1">
-        <span class="material-symbols-outlined text-sm">arrow_back</span> Back to Home
-      </a>
+      <div class="flex items-center gap-4">
+        <a href="cart.html" id="cartBtn" aria-label="Shopping Bag" class="hover:bg-gold/10 relative rounded-full p-2 transition">
+          <span class="material-symbols-outlined text-navy font-bold">shopping_bag</span>
+          <span id="cartBadge"
+            class="absolute right-0.5 top-0.5 flex hidden h-5 w-5 items-center justify-center rounded-full bg-gold text-[10px] font-bold text-navy">0</span>
+        </a>
+        <a href="index.html" class="text-sm font-medium transition flex items-center gap-1">
+          <span class="material-symbols-outlined text-sm">arrow_back</span> Back to Home
+        </a>
+      </div>
     </div>
   </header>
 

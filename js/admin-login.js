@@ -1,11 +1,12 @@
 // admin-login.js
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Redirect if already logged in
-    const token = localStorage.getItem('adminToken');
-    if (token) {
-        window.location.href = '/dashboard.html';
-    }
+    // Redirect if already logged in (Firebase)
+    auth.onAuthStateChanged((user) => {
+        if (user) {
+            window.location.href = 'dashboard.html';
+        }
+    });
 
     const loginForm = document.getElementById('loginForm');
     const errorMsg = document.getElementById('errorMsg');
@@ -14,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         
-        const username = document.getElementById('username').value;
+        const email = document.getElementById('email').value.trim();
         const password = document.getElementById('password').value;
 
         // Reset state
@@ -24,31 +25,14 @@ document.addEventListener('DOMContentLoaded', () => {
         submitBtn.disabled = true;
 
         try {
-            const response = await fetch('/api/auth/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ username, password })
-            });
-
-            const data = await response.json();
-
-            if (response.ok) {
-                // Save token and redirect
-                localStorage.setItem('adminToken', data.token);
-                localStorage.setItem('adminUser', data.username);
-                window.location.href = '/dashboard.html';
-            } else {
-                // Show error
-                errorMsg.textContent = data.message || 'Login failed';
-                errorMsg.classList.remove('hidden');
-                submitBtn.textContent = originalBtnText;
-                submitBtn.disabled = false;
-            }
+            // Firebase Sign In
+            await auth.signInWithEmailAndPassword(email, password);
+            // On success, Firebase onAuthStateChanged would typically handle redirect, 
+            // but we can also do it here if we want immediate feedback.
+            window.location.href = 'dashboard.html';
         } catch (error) {
             console.error('Error during login:', error);
-            errorMsg.textContent = 'Server error. Please try again later.';
+            errorMsg.textContent = error.message || 'Invalid email or password.';
             errorMsg.classList.remove('hidden');
             submitBtn.textContent = originalBtnText;
             submitBtn.disabled = false;

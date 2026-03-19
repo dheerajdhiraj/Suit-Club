@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Checkout | Suit Club</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0,1" />
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/luxury-theme.css">
+</head>
+<body class="antialiased flex flex-col min-h-screen bg-gray-50">
+
+    <!-- Header -->
+    <header class="px-6 py-6 border-b border-gray-100 bg-white md:px-12">
+        <div class="mx-auto flex max-w-7xl items-center justify-center relative">
+            <a href="cart.html" class="absolute left-0 text-sm font-medium hover:text-gold transition flex items-center gap-1">
+                <span class="material-symbols-outlined text-sm">arrow_back</span> Back to Cart
+            </a>
+            <div class="flex items-center gap-3">
+                <img src="assets/logo.jpg" alt="Suit Club Logo" class="h-10 w-auto object-contain">
+                <h1 class="bg-gradient-to-r from-yellow-500 via-red-500 to-yellow-600 bg-clip-text text-lg font-semibold tracking-wide text-transparent md:text-xl uppercase">
+                    SUIT CLUB
+                </h1>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-1 mx-auto max-w-5xl px-6 py-12 w-full">
+        <div id="checkoutGrid" class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            
+            <!-- Left: Delivery Details -->
+            <div>
+                <h2 class="font-serif text-3xl font-bold text-navy mb-8">Delivery Details</h2>
+                <form id="checkoutForm" class="space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="sm:col-span-2">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                            <input type="text" id="fullName" required class="w-full border rounded-xl px-4 py-3 focus:ring-gold focus:border-gold outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                            <input type="email" id="email" required class="w-full border rounded-xl px-4 py-3 focus:ring-gold focus:border-gold outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                            <input type="tel" id="phone" required class="w-full border rounded-xl px-4 py-3 focus:ring-gold focus:border-gold outline-none">
+                        </div>
+                        <div class="sm:col-span-2">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Shipping Address</label>
+                            <textarea id="address" rows="3" required class="w-full border rounded-xl px-4 py-3 focus:ring-gold focus:border-gold outline-none" placeholder="Street name, House no., City, Kathmandu..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="bg-navy/5 p-4 rounded-xl border border-navy/10">
+                        <p class="text-sm font-bold text-navy mb-2 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-gold">payments</span> Payment Method
+                        </p>
+                        <p class="text-xs text-gray-500">Currently only <strong>Cash on Delivery (COD)</strong> is available for all orders in Kathmandu. Our team will contact you for confirmation.</p>
+                    </div>
+
+                    <button type="submit" id="placeOrderBtn" class="w-full bg-navy text-white hover:bg-gold hover:text-navy transition py-5 rounded-2xl font-bold text-lg shadow-xl flex items-center justify-center gap-2">
+                        Place Order (Rs. <span id="btnTotal">0</span>)
+                    </button>
+                </form>
+            </div>
+
+            <!-- Right: Order Summary -->
+            <div id="orderSummary" class="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm h-fit sticky top-28">
+                <h3 class="font-serif text-2xl font-bold text-navy mb-6">Order Summary</h3>
+                <div id="summaryItems" class="space-y-4 mb-6">
+                    <!-- Items populated by JS -->
+                </div>
+                <div class="pt-6 border-t border-gray-100 space-y-4">
+                    <div class="flex justify-between text-gray-500">
+                        <span>Subtotal</span>
+                        <span id="summarySubtotal">Rs. 0</span>
+                    </div>
+                    <div class="flex justify-between text-gray-500">
+                        <span>Shipping</span>
+                        <span class="text-green-600 font-medium">Free</span>
+                    </div>
+                    <div class="flex justify-between items-end pt-2">
+                        <span class="text-navy font-bold">Total</span>
+                        <span id="summaryTotal" class="text-2xl font-bold text-navy">Rs. 0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success State -->
+        <div id="successState" class="hidden max-w-lg mx-auto text-center py-20 animate-fade-in">
+            <div class="bg-gold/10 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6 text-gold">
+                <span class="material-symbols-outlined text-6xl">verified</span>
+            </div>
+            <h2 class="text-3xl font-serif font-bold text-navy mb-4">Order Placed Successfully!</h2>
+            <p class="text-gray-600 mb-8">Thank you for choosing Suit Club. We have received your order <strong id="orderId">ORD-00000</strong>. Our team will reach out to you shortly for confirmation and fitting details.</p>
+            <div class="flex flex-col gap-3">
+                <a href="index.html" class="bg-navy text-white px-8 py-3 rounded-xl font-bold hover:bg-gold hover:text-navy transition">Return to Home</a>
+                <p class="text-xs text-gray-400">A confirmation email will be sent to your inbox.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-navy text-white text-center py-8 mt-auto">
+        <p class="text-sm text-gray-500">© 2026 Suit Club. All rights reserved.</p>
+    </footer>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="js/api-mock.js"></script>
+    <script src="js/checkout.js"></script>
+</body>
+</html>

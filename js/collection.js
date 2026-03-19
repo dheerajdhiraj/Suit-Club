@@ -37,6 +37,22 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .catch(err => console.error('Error fetching categories:', err));
 
+  // Update Cart Badge
+  function updateCartBadge() {
+    fetch('/api/cart')
+      .then(res => res.json())
+      .then(items => {
+        const count = items.reduce((sum, item) => sum + item.quantity, 0);
+        const badge = document.getElementById('cartBadge');
+        if (badge) {
+          badge.textContent = count;
+          badge.classList.toggle('hidden', count === 0);
+        }
+      })
+      .catch(err => console.error('Error updating cart badge:', err));
+  }
+  updateCartBadge();
+
   // Search, Sort, Filter listeners
   document.getElementById('searchInput')?.addEventListener('input', applyFilters);
   document.getElementById('sortSelect')?.addEventListener('change', applyFilters);
@@ -122,7 +138,7 @@ function renderProducts(products) {
   grid.innerHTML = products.map(prod => {
     const badgeHTML = prod.badge ? `<span class="badge ${getBadgeClass(prod.badge)}">${prod.badge}</span>` : '';
     return `
-      <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition group flex flex-col cursor-pointer" onclick="window.location.href='/product.html?id=${prod._id}'">
+      <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition group flex flex-col cursor-pointer" onclick="window.location.href='product.html?id=${prod._id}'">
         <div class="aspect-[3/4] overflow-hidden bg-gray-100 relative">
           ${badgeHTML}
           <img src="${prod.imageUrl || 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'}" alt="${prod.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">

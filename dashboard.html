@@ -6,7 +6,7 @@
   <title>Suit Club | Dashboard</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0,1" />
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="css/style.css">
   <style>
     /* Quick toggle utility */
     .tab-content { display: none; }
@@ -56,6 +56,10 @@
       <button onclick="switchTab('newsletter')" class="tab-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gold/10 transition-all text-left group">
         <span class="material-symbols-outlined text-gold group-hover:scale-110 transition-transform">mail</span>
         <span class="font-medium">Newsletter</span>
+      </button>
+      <button onclick="switchTab('orders')" class="tab-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gold/10 transition-all text-left group">
+        <span class="material-symbols-outlined text-gold group-hover:scale-110 transition-transform">receipt_long</span>
+        <span class="font-medium">Orders</span>
       </button>
 
       <div class="pt-10 mt-10 border-t border-white/5">
@@ -216,6 +220,33 @@
               <tr><td colspan="3" class="text-center py-12 text-gray-400 italic">No subscribers yet.</td></tr>
             </tbody>
           </table>
+        </div>
+      </section>
+
+      <!-- Orders Tab -->
+      <section id="orders" class="tab-content">
+        <div class="mb-10">
+          <h2 class="font-serif text-4xl font-bold text-navy">Sales & Orders</h2>
+          <p class="text-gray-500 mt-2">Track customer purchases and delivery status.</p>
+        </div>
+        <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse min-w-[1000px]">
+              <thead>
+                <tr class="bg-gray-50/50 border-b border-gray-100">
+                  <th class="py-5 px-6 font-bold text-navy text-xs uppercase tracking-widest">Order ID</th>
+                  <th class="py-5 px-6 font-bold text-navy text-xs uppercase tracking-widest">Customer</th>
+                  <th class="py-5 px-6 font-bold text-navy text-xs uppercase tracking-widest">Items</th>
+                  <th class="py-5 px-6 font-bold text-navy text-xs uppercase tracking-widest">Total (NPR)</th>
+                  <th class="py-5 px-6 font-bold text-navy text-xs uppercase tracking-widest">Status</th>
+                  <th class="py-5 px-6 font-bold text-navy text-xs uppercase tracking-widest text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="ordersTableBody" class="divide-y divide-gray-50">
+                <tr><td colspan="6" class="text-center py-12 text-gray-400 italic">No orders recorded.</td></tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
 
@@ -435,6 +466,10 @@
       </div>
     </div>
   </div>
+
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
 
   <script src="js/api-mock.js"></script>
   <script src="js/dashboard.js"></script>

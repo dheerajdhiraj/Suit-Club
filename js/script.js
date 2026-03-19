@@ -274,6 +274,19 @@ function updateWishlistCount() {
   if (badge) { badge.textContent = count; badge.classList.toggle('hidden', count === 0); }
   if (menuCount) menuCount.textContent = count;
 }
+function updateCartBadge() {
+  fetch('/api/cart')
+    .then(res => res.json())
+    .then(items => {
+      const count = items.reduce((sum, item) => sum + item.quantity, 0);
+      const badge = document.getElementById('cartBadge');
+      if (badge) {
+        badge.textContent = count;
+        badge.classList.toggle('hidden', count === 0);
+      }
+    })
+    .catch(err => console.error('Error updating cart badge:', err));
+}
 function showWishlist() {
   closeUserDropdown();
   const sidebar = document.getElementById('wishlistSidebar');
@@ -304,7 +317,7 @@ function renderWishlistItems() {
       <div class="min-w-0 flex-1">
         <h4 class="text-navy truncate text-sm font-bold">${p.title}</h4>
         <p class="mt-1 text-xs text-gray-500">${p.price ? 'Rs. ' + p.price.toLocaleString() : 'Price on request'}</p>
-        <a href="/product.html?id=${p._id}" onclick="closeWishlist()" class="text-gold mt-2 inline-block text-xs font-medium hover:underline">View →</a>
+        <a href="product.html?id=${p._id}" onclick="closeWishlist()" class="text-gold mt-2 inline-block text-xs font-medium hover:underline">View →</a>
       </div>
       <button onclick="removeFromWishlist('${p._id}')" class="self-start p-1 text-red-400 hover:text-red-600"><span class="material-symbols-outlined text-lg">delete</span></button>
     </div>
@@ -432,9 +445,9 @@ function initBackToTop() {
 
 // ─── Dynamic Collections from API ────────────────────────────────────────────
 const FALLBACK_CARDS = [
-  { name: 'The Executive', description: 'Timeless sophistication for the modern leader.', imageUrl: './assets/20549.jpg' },
-  { name: 'Wedding Luxe', description: 'Make your day unforgettable with bespoke elegance.', imageUrl: './assets/20549.jpg' },
-  { name: 'Nepalese Heritage', description: 'Local inspiration, global craftsmanship.', imageUrl: './assets/20547.jpg' },
+  { name: 'The Executive', description: 'Timeless sophistication for the modern leader.', imageUrl: './assets/executive.jpg' },
+  { name: 'Wedding Luxe', description: 'Make your day unforgettable with bespoke elegance.', imageUrl: './assets/nepalease heritage.jpg' },
+  { name: 'Nepalese Heritage', description: 'Local inspiration, global craftsmanship.', imageUrl: './assets/tradition1.jpg' },
 ];
 
 function renderCategoryCard(cat, index) {
@@ -450,7 +463,7 @@ function renderCategoryCard(cat, index) {
     <div class="p-6">
       <h3 class="mb-2 font-serif text-2xl font-bold">${cat.name}</h3>
       <p class="mb-4 text-gray-600">${cat.description || 'Exclusive suits crafted with the finest materials.'}</p>
-      <a href="/collection.html?category=${encodeURIComponent(cat.name)}" class="text-gold inline-flex items-center gap-1 font-medium transition hover:gap-2">
+      <a href="collection.html?category=${encodeURIComponent(cat.name)}" class="text-gold inline-flex items-center gap-1 font-medium transition hover:gap-2">
         Explore <span class="material-symbols-outlined text-sm">arrow_forward</span>
       </a>
     </div>
@@ -555,6 +568,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Back to top
   initBackToTop();
+
+  // Cart badge init
+  updateCartBadge();
 
   // Escape key to close modals
   document.addEventListener('keydown', function (e) {

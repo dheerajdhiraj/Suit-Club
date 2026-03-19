@@ -1,13 +1,23 @@
 // dashboard.js
 
-// Authorization check on load
-const token = localStorage.getItem('adminToken');
-if (!token) {
-    window.location.href = '/admin.html';
-}
+let token = 'firebase-auth';
 
-// Display admin name
-document.getElementById('adminNameDisplay').textContent = localStorage.getItem('adminUser') || 'Suit Club Admin';
+// Authorization check on load (Firebase)
+auth.onAuthStateChanged((user) => {
+    if (user) {
+        // Display admin name
+        document.getElementById('adminNameDisplay').textContent = user.email || 'Suit Club Admin';
+        // We can update the token with something more specific if needed
+        token = user.uid; 
+        
+        // Fetch initial data only after auth is confirmed
+        fetchCategories();
+        fetchProducts();
+    } else {
+        // Not logged in
+        window.location.href = 'admin.html';
+    }
+});
 
 // Tab switching logic
 function switchTab(tabId) {
@@ -26,12 +36,19 @@ function switchTab(tabId) {
     if (tabId === 'bookings') fetchBookings();
     if (tabId === 'reviews') fetchReviews();
     if (tabId === 'newsletter') fetchNewsletter();
+    if (tabId === 'orders') fetchOrders();
 }
 
-function logout() {
-    localStorage.removeItem('adminToken');
-    localStorage.removeItem('adminUser');
-    window.location.href = '/admin.html';
+async function logout() {
+    try {
+        await auth.signOut();
+        localStorage.removeItem('adminToken'); // Clean up old mock data just in case
+        localStorage.removeItem('adminUser');
+        window.location.href = 'admin.html';
+    } catch (error) {
+        console.error('Logout error:', error);
+        alert('Failed to sign out.');
+    }
 }
 
 // Modal handling
@@ -272,6 +289,49 @@ async function fetchNewsletter() {
             tbody.appendChild(tr);
         });
     } catch (err) { console.error(err); }
+}
+
+async function fetchOrders() {
+    try {
+        const res = await fetch('/api/orders', { headers: { 'x-auth-token': token } });
+        const orders = await res.json();
+        const tbody = document.getElementById('ordersTableBody');
+        tbody.innerHTML = '';
+
+        if (orders.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="6" class="text-center py-12 text-gray-400 italic">No orders recorded yet.</td></tr>';
+            return;
+        }
+
+        orders.forEach(o => {
+            const itemsList = (o.items || []).map(i => `<div class="text-[10px]"><span class="font-bold">${i.quantity}x</span> ${i.title}</div>`).join('');
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td class="py-4 px-6 text-xs font-mono text-gray-400">#${o._id.slice(-8)}</td>
+                <td class="py-4 px-6">
+                    <p class="font-bold text-navy text-sm">${o.customer?.fName} ${o.customer?.lName}</p>
+                    <p class="text-[10px] text-gray-500">${o.customer?.email}</p>
+                </td>
+                <td class="py-4 px-6">${itemsList}</td>
+                <td class="py-4 px-6 font-bold text-navy">Rs. ${o.total?.toLocaleString()}</td>
+                <td class="py-4 px-6">
+                    <span class="px-2 py-1 rounded-full text-[10px] font-bold uppercase ${o.status === 'Pending' ? 'bg-yellow-100 text-yellow-700' : 'bg-green-100 text-green-700'}">${o.status || 'Pending'}</span>
+                </td>
+                <td class="py-4 px-6 text-right">
+                    <button onclick="deleteOrder('${o._id}')" class="text-red-400 hover:text-red-600 transition">
+                        <span class="material-symbols-outlined text-lg">delete</span>
+                    </button>
+                </td>
+            `;
+            tbody.appendChild(tr);
+        });
+    } catch (err) { console.error(err); }
+}
+
+async function deleteOrder(id) {
+    if (!confirm('Delete this order record?')) return;
+    const res = await fetch(`/api/orders/${id}`, { method: 'DELETE', headers: { 'x-auth-token': token } });
+    if (res.ok) { showAlert('Order record removed'); fetchOrders(); }
 }
 
 // ─── Actions ──────────────────────────────────────────────────────────────────
@@ -519,7 +579,4 @@ async function deleteProduct(id) {
 
 // ─── Init ─────────────────────────────────────────────────────────────────────
 
-document.addEventListener('DOMContentLoaded', () => {
-    fetchCategories();
-    fetchProducts();
-});
+// Initialization is handled by onAuthStateChanged for security/sync
